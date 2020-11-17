@@ -11,7 +11,7 @@ BOT_NAME = 'qartnewsurfer'
 
 SPIDER_MODULES = ['qartnewsurfer.spiders']
 NEWSPIDER_MODULE = 'qartnewsurfer.spiders'
-
+CONNECTION_STRING = "sqlite:///onge_pages.db"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'qartnewsurfer (+http://www.yourdomain.com)'
@@ -62,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'qartnewsurfer.pipelines.QartnewsurferPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'qartnewsurfer.pipelines.QartnewsurferPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

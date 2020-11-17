@@ -10,8 +10,8 @@ class OnGe(SetupTemplate):
     def __init__(self):
         SetupTemplate.__init__(self, **sources['onge'])
 
-    def get_url(self, category, page):
-        if category in self.categories and page in range(self.categories[category]['max_pages']):
+    def get_url(self, category=0, page=0):
+        if category in self.categories and self.categories[category]['max_pages'] is None or page in range(self.categories[category]['max_pages']):
             return (f"{self.base_url}"                                   # base
                     f"/category/{self.categories[category]['url']}"      # category
                     f"?page={page}")                                     # page
@@ -21,14 +21,14 @@ class OnGe(SetupTemplate):
 
 sources = {
     "onge": {
-        'name': 'on.ge',
+        'name': 'onge',
         'base_url': 'https://on.ge',
         'splitter': '=',
         'categories': {
             0: {'geo': 'პოლიტიკა',
                 'eng': 'politics',
                 'url': 'პოლიტიკა',
-                'max_pages': 5},
+                'max_pages': None},
             1: {'geo': 'საზოგადოება',
                 'eng': 'social',
                 'url': 'საზოგადოება',
