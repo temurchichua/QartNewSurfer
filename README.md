@@ -28,7 +28,7 @@ onge | on.ge
 full shell command example with attributes:
 
 ```shell script
-scrapy crawl onge -a category=1 start_page=2 max_page=5
+scrapy crawl onge -a category=1 -a start_page=2 -a max_page=5
 ```
 
 ### Table of Attributes
@@ -38,7 +38,7 @@ category | post category in int (check the categories for the surfboard)| `categ
 start_page | page index to start scrapping from (default=0)| `start_page=50`
 max_page | page index to end scrapping at (default is the last "next" page for the platform) | `max_page=110`
 
-### Storing the scraped data
+## Storing the scraped data
 ```shell script
 scrapy crawl onge -O pages.json
 ```
@@ -48,4 +48,8 @@ When appending to a file, consider using a different serialization format, such 
 ```shell script
 scrapy crawl onge -o pages.jl
 ```
+### cmd with attributes
+
+```shell script
 scrapy crawl onge -O quotes-humor.json -a category=1 -a start_page=2 -a max_page=5
+```

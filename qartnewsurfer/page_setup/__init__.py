@@ -1,5 +1,10 @@
 from string import Template
 
+from sqlalchemy.orm import sessionmaker
+
+from qartnewsurfer.models import Session
+from qartnewsurfer.models.onge_model import Category
+
 
 class SetupTemplate:
     def __init__(self, **source):
@@ -10,13 +15,19 @@ class OnGe(SetupTemplate):
     def __init__(self):
         SetupTemplate.__init__(self, **sources['onge'])
 
-    def get_url(self, category=0, page=0):
-        if category in self.categories and self.categories[category]['max_pages'] is None or page in range(self.categories[category]['max_pages']):
-            return (f"{self.base_url}"                                   # base
-                    f"/category/{self.categories[category]['url']}"      # category
-                    f"?page={page}")                                     # page
-        else:
+    def get_url(self, category=1, page=1):
+        session = Session()
+        try:
+            category = session.query(Category).get(category)
+
+        except Exception as e:
+            print(e)
             raise ValueError("page or/and category is/are out of range")
+
+        else:
+            return (f"{self.base_url}"  # base
+                    f"/category/{category.url_tag}"  # category
+                    f"?page={page}")  # page
 
 
 sources = {
@@ -27,16 +38,25 @@ sources = {
         'categories': {
             0: {'geo': 'პოლიტიკა',
                 'eng': 'politics',
-                'url': 'პოლიტიკა',
-                'max_pages': None},
+                'url': 'პოლიტიკა',},
             1: {'geo': 'საზოგადოება',
                 'eng': 'social',
-                'url': 'საზოგადოება',
-                'max_pages': 5},
+                'url': 'საზოგადოება'},
             2: {'geo': 'ეკონომიკა',
                 'eng': 'economics',
-                'url': 'ეკონომიკა',
-                'max_pages': 5},
+                'url': 'ეკონომიკა'},
+3: {'geo': 'სამეცნიერო ტექნოლოგია',
+                'eng': 'science technologies',
+                'url': 'sci-tech'},
+4: {'geo': 'კულტურა',
+                'eng': 'culture',
+                'url': 'კულტურა'},
+5: {'geo': 'ცხოვრების სტილი',
+                'eng': 'lifestyle',
+                'url': 'ცხოვრება'},
+6: {'geo': 'ეკონომიკა',
+                'eng': 'economics',
+                'url': 'ეკონომიკა'},
         },
 
     }
