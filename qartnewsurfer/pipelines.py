@@ -58,7 +58,7 @@ class QartnewsurferPipeline(object):
                         category = Category(geo=category_name, url_tag=category_url, number_of_posts=1)
                         # check whether the current tag already exists in the database
                         exist_category = session.query(Category).filter_by(geo=category.geo).first()
-                        if exist_category is not None:  # the current tag exists
+                        if exist_category:  # the current tag exists
                             category = exist_category
                             category.number_of_posts += 1
 

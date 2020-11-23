@@ -38,5 +38,5 @@ for category in onge.categories:
 
 process = CrawlerProcess(get_project_settings())
 
-process.crawl('onge')
+process.crawl('onge', max_page=1)
 process.start()  # the script will block here until the crawling is finished

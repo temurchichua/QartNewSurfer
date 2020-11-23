@@ -57,7 +57,10 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     geo = Column('geo', String(30), unique=True)
     eng = Column('eng', String(30), unique=True)
-    url_tag = Column('url_tag', Text(), unique=True)
+    url_tag = Column('url_tag', Text())
     number_of_posts = Column('post_count', Integer)
     posts = relationship('Post', secondary='post_category',
                          lazy='dynamic', backref="category")  # M-to-M for quote and tag
+
+    def __repr__(self):
+        return str(self.__dict__)

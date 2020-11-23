@@ -13,6 +13,8 @@ class OngeSpider(scrapy.Spider):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.max_page = getattr(self, 'max_page', None)
+        print(f'max page is {self.max_page} page/s')
 
     def start_requests(self):
         print(target.base_url)
@@ -46,11 +48,8 @@ class OngeSpider(scrapy.Spider):
         yield from response.follow_all(css='a.overlay-link', callback=self.parse_post)
 
         next_page = response.css('a.pager-left::attr(href)').get()
-        next_page_id = int(next_page.split("=")[1])
-        max_page = getattr(self, 'max_page', None)
-        if next_page is not None and max_page is None or next_page_id < int(max_page):
+        if next_page is not None and self.max_page is None or int(next_page.split("=")[1]) < int(self.max_page):
             next_page = response.urljoin(next_page)
-            yield scrapy.Request(next_page, callback=self.parse)
 
         else:
             session = Session()
@@ -60,6 +59,8 @@ class OngeSpider(scrapy.Spider):
                 current_status.current_category += 1
 
                 next_category = session.query(Category).get(current_status.current_category)
+                print(next_category)
+
                 if next_category:
                     next_page = target.get_url(next_category.id)
 
@@ -78,6 +79,8 @@ class OngeSpider(scrapy.Spider):
 
             else:
                 print("can't find the current status")
+
+        yield scrapy.Request(next_page, callback=self.parse)
 
     def parse_post(self, response):
         text = " ".join(response.xpath("/html/body/div[3]/div[1]/div/div/article/div[3]/p/text()").getall())
