@@ -4,3 +4,4 @@
 # your spiders.
 
 from .onge_spider import OngeSpider
+from .tabula_spider import TabulaSpider
