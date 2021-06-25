@@ -25,7 +25,4 @@ class Nsecurity(scrapy.Spider):
             "text": text,
             "img_src": img_src,
             }
-        with open('something.json', 'w') as outfile:
-            json.dump(data, outfile, ensure_ascii=False)
-
         yield data
