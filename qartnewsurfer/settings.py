@@ -13,6 +13,9 @@ SPIDER_MODULES = ['qartnewsurfer.spiders']
 NEWSPIDER_MODULE = 'qartnewsurfer.spiders'
 CONNECTION_STRING = "sqlite:///onge_pages.db"
 
+FEED = 'json'
+FEED_EXPORT_ENCODING = 'utf-8'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'qartnewsurfer (+http://www.yourdomain.com)'
 
