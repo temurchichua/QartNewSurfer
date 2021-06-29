@@ -10,7 +10,7 @@ class ImediNewsSpider(scrapy.Spider):
         category = response.xpath('/html/body/div[3]/div[1]/div[2]/section/div/section/div/div[1]/div[1]/div/a/text()').get()
         date = response.xpath('/html/body/div[3]/div[1]/div[2]/section/div/section/div/div[1]/div[2]/div/div/div[1]/span[1]/text()').get()
         article_title = response.xpath('/html/body/div[3]/div[1]/div[2]/section/div/section/div/div[1]/div[2]/div/div/h1/text()').get()
-        article_body = response.xpath('/html/body/div[3]/div[1]/div[2]/section/div/section/div/div[1]/div[2]/div/div/div[5]').xpath('p/text()').getall()
+        article_body = response.xpath('/html/body/div[3]/div[1]/div[2]/section/div/section/div/div[1]/div[2]/div/div/div[5]/p/text()').getall()
 
         page_dict = {'category': category,
                      'date' : date,
