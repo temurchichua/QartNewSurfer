@@ -5,3 +5,4 @@
 
 from .onge_spider import OngeSpider
 from .tabula_spider import TabulaSpider
+from .imedinews_spider import ImediNewsSpider
