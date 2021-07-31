@@ -6,3 +6,4 @@
 from .onge_spider import OngeSpider
 from .tabula_spider import TabulaSpider
 from .radio_tavisupleba_spider import RadioTavisuplebaSpider
+from .imedinews_spider import ImediNewsSpider
